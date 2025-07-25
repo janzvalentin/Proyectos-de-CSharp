@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp", "CSharp\CSharp.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculadora de Conversión de Tipos", "Fundamentos C#\Calculadora de Conversión de Tipos.csproj", "{4B6DD0EC-3C0C-4310-A0AC-98A670811691}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaDeCalificaciones", "SistemaDeCalificaciones\SistemaDeCalificaciones.csproj", "{C842814B-A88A-42FA-A4B8-5774BC9BE421}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sistema de Gestión de Inventario", "Sistema de Gestión de Inventario\Sistema de Gestión de Inventario.csproj", "{D2957D66-063E-4A51-A521-DDBF15089572}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{4B6DD0EC-3C0C-4310-A0AC-98A670811691}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B6DD0EC-3C0C-4310-A0AC-98A670811691}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B6DD0EC-3C0C-4310-A0AC-98A670811691}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C842814B-A88A-42FA-A4B8-5774BC9BE421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C842814B-A88A-42FA-A4B8-5774BC9BE421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C842814B-A88A-42FA-A4B8-5774BC9BE421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C842814B-A88A-42FA-A4B8-5774BC9BE421}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2957D66-063E-4A51-A521-DDBF15089572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2957D66-063E-4A51-A521-DDBF15089572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2957D66-063E-4A51-A521-DDBF15089572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2957D66-063E-4A51-A521-DDBF15089572}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

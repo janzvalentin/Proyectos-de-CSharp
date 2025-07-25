@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.Metrics;
+using System.Numerics;
 using System.Reflection.Emit;
 #region VARIABLES Y TIPOS DE DATOS / IMPRIMIR Y LEER EN CONSOLA
 /* VARIABLES Y TIPOS DE DATOS
@@ -433,3 +435,174 @@ Console.WriteLine($"Mayores de 60 años: {mayores60}");
 Console.WriteLine($"\nEl promedio de edades es: {promedio:F2} años");
 */
 #endregion
+
+#region ARRAYS
+/*
+string[] nombres = { "Juan", "María", "Pedro","Lucía" };
+
+foreach (string nombre in nombres)
+{
+    Console.WriteLine($"Nombre: {nombre}");
+}
+*/
+
+/*
+Console.WriteLine("*********ELEMENTOS DEL ARRAY**********");
+int[] numeros = { 4, 7, 2, 9, 5, 1 };
+
+for (int i = 0; i < numeros.Length; i++)
+{
+    Console.WriteLine($"Número:{numeros[i]}");
+}
+
+int suma = 0;
+foreach (int numero in numeros)
+{
+    suma += numero;
+}
+Console.WriteLine($"La suma total es: {suma}");
+Console.ReadKey();
+*/
+
+/*
+int suma = 0;
+int[] numeros = { 15, 17, 20, 14, 13, 18 };
+for (int i = 0; i < numeros.Length;i++)
+{
+    suma += numeros[i];
+}
+double promedio = (double)suma/numeros.Length;
+Console.WriteLine($"El promedio es: {promedio:F4}");
+*/
+
+/*
+int [] numeros = { 3, 6, 2, 9, 10, 7, 4, 1, 8, 5 };
+
+int contadorPares = 0;
+for (int i = 0; i < numeros.Length; i++)
+{
+    if (numeros[i] %2==0)
+    { 
+    contadorPares++;
+    }
+}
+Console.WriteLine($"Cantidad de números pares: {contadorPares}");
+Console.ReadKey();
+*/
+
+/*
+Console.WriteLine("**********Contar cuántos números son mayores o iguales a 10**********");
+int[] numeros = { 5, 12, 8, 17, 3, 10, 22, 1, 14, 6 };
+
+int contadorMayores10 = 0;
+for (int i = 0; i < numeros.Length; i++)
+{
+    if (numeros[i] >= 10)
+    {
+        contadorMayores10++;
+    }
+}
+Console.WriteLine($"Cantidad de números mayores o igual a 10:{contadorMayores10}");
+*/
+#endregion
+/*
+int contadosEstudiantesProcesados = 0;
+string continuar = "si";
+while (continuar == "si")
+{
+    string nombre = "";
+    int numMaterias = 0;
+    double sumaTotalCalificaciones = 0;
+    double promedio = 0;
+    bool aprobado = false;
+
+    Console.Write("Ingrese el nombre del estudiante: ");
+    nombre = Console.ReadLine();
+
+
+
+    bool numero = false;
+    while (!numero)
+    {
+        Console.Write("Ingrese el número de materias que cursó (entre 1 y 10): ");
+
+        string ingreseNumMaterias = Console.ReadLine();
+        bool validarNumero = int.TryParse(ingreseNumMaterias, out numMaterias);
+        if (validarNumero && numMaterias >= 1 && numMaterias <= 10)
+        {
+            numero = true;
+        }
+        else
+        {
+            Console.WriteLine("Numero de materia inválida. Vuelva intentarlo.");
+        }
+    }
+
+    Console.WriteLine("Ingrese las calificaciones de cada materia (valores entre 0.0 y 10.0)");
+
+    for (int i = 1; i <= numMaterias; i++)
+    {
+        Console.Write($"Materia {i}: ");
+
+
+        bool calificacion = false;
+        while (!calificacion)
+        {
+
+            double nota = 0;
+            string ingreseCalificacion = Console.ReadLine();
+
+
+            if (double.TryParse(ingreseCalificacion, out nota) && nota >= 0.0 && nota <= 10.0)
+            {
+                calificacion = true;
+                sumaTotalCalificaciones += nota;
+            }
+            else
+            {
+                Console.WriteLine("Número de calificación es incorrecta. Vuelva intentarlo.");
+            }
+
+        }
+    }
+    promedio = sumaTotalCalificaciones / numMaterias;
+
+    aprobado = promedio >= 6.0;
+    string resultado = aprobado ? "Aprobó" :"Desaprobó";
+
+    if (promedio >= 9.0)
+    {
+        Console.WriteLine("Rendimiento: Excelente");
+    }
+    else if (promedio >= 8.0)
+    {
+        Console.WriteLine("Rendimiento: Muy Bueno");
+    }
+    else if (promedio >= 7.0)
+    {
+        Console.WriteLine("Rendimiento: Bueno");
+    }
+    else if (promedio >= 6.0)
+    {
+        Console.WriteLine("Rendimiento: Suficiente");
+    }
+    else
+    { 
+    Console.WriteLine("Rendimiento: insuficiente");
+    }
+
+    contadosEstudiantesProcesados++;
+    Console.WriteLine("**********RESULTADOS DEL PROCESO**********");
+    Console.WriteLine($"Nombre: {nombre}");
+    Console.WriteLine($"Numero de Materias que cursó: {numMaterias}");
+    Console.WriteLine($"Suma de Calificaciones: {sumaTotalCalificaciones}");
+    Console.WriteLine($"Promedio: {promedio:F2}");
+    Console.WriteLine($"Rsultado: {resultado}");
+
+    Console.WriteLine($"Estudiantes que usaron el Sistema: {contadosEstudiantesProcesados}");
+
+    Console.WriteLine($"¿Desea calcular otro estudiante? (si/no)");
+    continuar = Console.ReadLine();
+}
+*/
+
