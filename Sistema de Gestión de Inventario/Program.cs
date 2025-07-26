@@ -3,41 +3,42 @@ using System.Numerics;
 
 class Program
 {
-    //ARRAYS GLOBALES PARA ALM
-    static string[] nombres = new string[2];
-    static double[] precios = new double[2];
-    static int[] cantidades = new int[2];
-    static int totalProductos = 0;
+    //ARRAYS GLOBALES 
+    static string[] nombres = new string[2]; //ALMACENA NOMBRES DE PRODUCTOS
+    static double[] precios = new double[2];//ALMACENA PRECIOS
+    static int[] cantidades = new int[2];//ALMACENA LAS CANTIDADES
+    static int totalProductos = 0; //ESTE ES UN CONTADOR DE LOS PRODUCTOS INGRESADOS
 
     static void Main(string[] args)
     {
         //NOMBRE DEL PROYECTO
         Console.WriteLine("====Sistema de Gestión de Inventario====");
-        Console.WriteLine(new string('-', 40));
+        Console.WriteLine(new string('-', 40));//LINEA SQUE SEPARA CON 40 GUINES
 
-        //BUBLE DEL MENU DE OPCIONES
+        //BUBLE PRINCIPAL DEL MENU DE OPCIONES
         bool continuar = true;
         while (continuar)
         {
-            MostrarMenu();
+            MostrarMenu();// MUESTRA LAS OPCIONES DISPONIBLES
             Console.Write("Ingrese una opción: ");
-            string opcion = Console.ReadLine();
+            string opcion = Console.ReadLine(); //LEE LAS OPCIONESDEL USUARIO
 
             switch (opcion)
             {
-                case "1":
+                case "1": //Opción agregar producto
 
                     if (totalProductos >= 2)
                     {
                         Console.WriteLine("El inventario esta lleno.");
-                        break;
+                        break; //sale del bucle y evita seguir piendo datos cuando ya esta lleno
                     }
-
+                  
                     Console.WriteLine("\nAregar producto:");
                     Console.WriteLine(new string('-', 40));
                     Console.Write("Ingrese nombre del producto:");
                     string nombre = Console.ReadLine();
 
+                    //VALIDAD PRECIO
                     double precio = 0;
                     while (true)
                     {
@@ -46,7 +47,7 @@ class Program
                         {
                             if (precio > 0)
                             {
-                                break;
+                                break; // SALE DEL BUCLE SI EN PRECIO ES VALIDO
                             }
                             else
                             {
@@ -58,6 +59,8 @@ class Program
                             Console.WriteLine("ERROR: INGRESE UN NUMERO VÁLIDA.");
                         }
                     }
+
+                    //VALIDAR CANTIDAD
                     int cantidad = 0;
                     while (true)
                     {
@@ -67,7 +70,7 @@ class Program
                         {
                             if (cantidad >= 0)
                             {
-                                break;
+                                break; //ESTO INDICA QUE LA CANTIDAS INGRESADA FUE CORRECTO Y SALE DEL BUCLE PARA QUE SE GUARDE
                             }
                             else
                             {
@@ -79,6 +82,8 @@ class Program
                             Console.WriteLine("ERROR: CANTIDAD INVÁLIDA");
                         }
                     }
+
+                    //LLAMA AL METODO PARA AGREGAR PRODUCTO
                     if (AgregarProducto(nombres, precios, cantidades, ref totalProductos, nombre, precio, cantidad))
                     {
                         Console.WriteLine("¡PRODUCTO AGREGADO!");
@@ -86,15 +91,16 @@ class Program
                     Console.WriteLine(new string('-', 40));
                     break;
 
-                case "2":
+                case "2": //Opción para buscar producto
                     Console.WriteLine("\nBuscar Producto: ");
                     Console.WriteLine(new string('-', 40));
                     Console.Write("Buscar nombre del producto: ");
                     string nombreBuscar = Console.ReadLine();
 
                     int indice = BuscarProducto(nombres, totalProductos, nombreBuscar);
-                    if (indice != -1)
+                    if (indice != -1) //Si el indice producto que estoy buscando me arroja que ya existe(!=-1)
                     {
+                        //ME ARROJARIA QUE EL PRODUCTO FUE ENCONTRADO Y ME MUESTRA LA INFORMACION TIPO TABLA
                         Console.WriteLine(new string('-', 50));
                         Console.WriteLine("=====PRODUCTO ENCONTRADO=====");
                         Console.WriteLine(new string('-', 50));
@@ -110,27 +116,29 @@ class Program
                         Console.WriteLine("Procuto no encontrado.");
                     }
                     break;
-                case "3":
+                case "3": //Opción para mostrar el inventario completo
                     MostrarInventario(nombres, precios, cantidades, totalProductos);
                     break;
-                case "4":
+                case "4": //Opción para calcular el Valor total del inventario
                     Console.WriteLine();
                     double valorTotal = CalcularValorTotal(precios, cantidades, totalProductos);
                     Console.WriteLine($"Valor total del inventario: {valorTotal:C}");
                     Console.WriteLine(new string('-', 40));
                     break;
-                case "5":
-                    continuar = false;
+                case "5": // Opción salir del programa
+                    continuar = false; 
                     break;
 
                 default:
-                    Console.WriteLine("Opción inválida.");
+                    Console.WriteLine("Opción inválida."); //Si el usuario ingresa una opción no válida
                     break;
             }
 
         }
 
     }
+
+    //Método para mostrar el menú
 
     static void MostrarMenu()
     {
@@ -144,6 +152,7 @@ class Program
 
     }
 
+    //Método para agregar un producto
     static bool AgregarProducto(string[] nombres, double[] precios, int[] cantidades, ref int totalproductos, string nombre,
         double precio, int cantidad)
     {
@@ -159,12 +168,16 @@ class Program
         }
         if (BuscarProducto(nombres, totalproductos, nombre) != -1)
         {
+            Console.WriteLine("Ese producto ya existe.");
             return false;
         }
         if (totalproductos >= 2)
         {
             Console.WriteLine("Inventario lleno.");
+            return false;
         }
+
+        //Agrego datos al inventario
         nombres[totalproductos] = nombre;
         precios[totalproductos] = precio;
         cantidades[totalproductos] = cantidad;
@@ -172,17 +185,21 @@ class Program
         return true;
 
     }
+
+    //Método para buscar un producto por nombre
     static int BuscarProducto(string[] nombres, int totalProductos, string nombreBuscar)
     {
         for (int i = 0; i < totalProductos; i++)
         {
-            if (nombres[i].Equals(nombreBuscar, StringComparison.OrdinalIgnoreCase))
+            if (nombres[i].Equals(nombreBuscar, StringComparison.OrdinalIgnoreCase)) // comprara los nombres que busqué incluso ignora las mayusculas/minusculas
             {
-                return i;
+                return i;//Devuelve l indice si lo encuentra
             }
         }
-        return -1;
+        return -1;//No se encontró lo que estaba buscando
     }
+
+    //Método para mostrar todo el inventario
     static void MostrarInventario(string[] nombres, double[] precios, int[] cantidades, int totalProductos)
     {
         if (totalProductos == 0)
@@ -203,6 +220,8 @@ class Program
         }
         Console.WriteLine(new string('-', 50));
     }
+
+    //Método para calcular valor total del inventario
     static double CalcularValorTotal(double[] precios, int[] cantidades, int totalProductos)
     {
         double total = 0;
