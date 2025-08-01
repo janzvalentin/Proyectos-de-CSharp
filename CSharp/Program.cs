@@ -606,3 +606,254 @@ while (continuar == "si")
 }
 */
 
+#region MÓDULO 8: Programación Orientada a Objetos - Fundamentos
+/*
+class Libro
+{
+    public string Titulo { get; set; }
+    private int añoPublicacion;
+    private double precio;
+    public int AñoPublicacion
+    {
+        get { return añoPublicacion; }
+        set
+        {
+            if (value >= 1900)
+                añoPublicacion = value;
+            else
+                Console.WriteLine("Año de publicación inválido. Debe ser mayor a 1900.");
+        }
+    }
+    public double Precio
+    {
+        get { return precio; }
+        set
+        {
+            if (value >= 1)
+            {
+                precio = value;
+            }
+            else
+            {
+                Console.WriteLine("Precio inválido. Debe ser mayor o igual a 1.");
+            }
+        }
+    }
+
+    public Libro() : this("Sin título", 2000, 10) { }
+
+    public Libro(string titulo, int año, double precio)
+    {
+        Titulo = titulo;
+        AñoPublicacion = año;
+        Precio = precio;
+    }
+
+    public void MostrarInfo()
+    {
+        Console.WriteLine($"Título: {Titulo}");
+        Console.WriteLine($"Año: {AñoPublicacion}");
+        Console.WriteLine($"Precio: {Precio:C}");
+        Console.WriteLine();
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Libro libro = new Libro("Cien años de Soledad", 1967, 25.50);// INSTANCIA CON VALORES PERSONALIZADO
+        libro.MostrarInfo();
+
+        Libro libro1 = new Libro();//INSTANCIA CON CONSTRUCTOR POR DEFECTO
+        libro1.MostrarInfo();
+
+        libro1.AñoPublicacion = 1899;
+        libro1.Precio = 0;
+
+    }
+}
+*/
+/*
+class Alumno
+{
+    public string Nombre { get; set; }
+    public string Curso { get; set; }
+    private int edad;
+
+    public int Edad
+    {
+        get { return edad; }
+        set
+        {
+            if (value >= 5)
+            {
+                edad = value;
+            }
+            else
+            {
+                Console.WriteLine("Ingrese una edad correcta.");
+            }
+        }
+    }
+
+    private double notaFinal;
+    public double NotaFinal
+    {
+        get { return notaFinal; }
+        set
+        {
+
+            if (value >= 0 && value <= 20)
+            {
+                notaFinal = value;
+            }
+            else
+            {
+                Console.WriteLine("Ingrese una nota correcta.");
+            }
+        }
+    }
+
+    public Alumno() : this("Sin nombre", "Sin curso", 10, 18.5) { }
+    public Alumno(string nombre, string curso, int edad, double notaFinal)
+    {
+        Nombre = nombre;
+        Curso = curso;
+        Edad = edad;
+        NotaFinal = notaFinal;
+    }
+    public string Estado()
+    {
+        if (notaFinal >= 11)
+        {
+            return "Aprobado";
+        }
+        else
+        {
+            return "Desaprobado";
+        }
+
+    }
+    public void MostrarInfo()
+    {
+        Console.WriteLine($"Nombre: {Nombre}");
+        Console.WriteLine($"Edad: {(Edad>0? Edad +" Años":"No establecida")}");
+        Console.WriteLine($"Curso: {Curso}");
+        Console.WriteLine($"Nota: {NotaFinal}");
+        Console.WriteLine($"Estado: {Estado()} ");
+        Console.WriteLine(new string('-', 35));
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Alumno alumno = new Alumno("Carlos", "Aritmetica", 5, 11);
+        alumno.MostrarInfo();
+
+        Alumno al = new Alumno("Alex", "Algebra", 3, 10);
+        al.MostrarInfo();
+
+        Alumno alumno1 = new Alumno();
+        alumno1.MostrarInfo();
+
+        alumno1.Edad = 3;
+        alumno1.NotaFinal = 21;
+    }
+}
+*/
+/*
+class Categoria
+{
+    public string Nombre { get; set; }
+    public string Descripcion { get; set; }
+
+    public Categoria() : this("Sin nombre", "Sin descripción") { }
+    public Categoria(string nombre, string descripcion)
+    {
+        Nombre = nombre;
+        Descripcion = descripcion;
+    }
+    public void MostrarCategoria()
+    {
+        Console.WriteLine($"Categoría: {Nombre}| {Descripcion}");
+    }
+}
+
+class Producto
+{
+    public string NombreProducto { get; set; }
+    public Categoria Categoria { get; set; }
+    private double precio;
+    public double Precio
+    {
+        get { return precio; }
+        set
+        {
+            if (value >= 1.00)
+            {
+                precio = value;
+            }
+            else
+            {
+                Console.WriteLine("ERROR: El precio tiene que ser mayor a 0");
+            }
+        }
+    }
+
+    private int stock;
+    public int Stock
+    {
+        get { return stock; }
+        set
+        {
+            if (value >= 0)
+            {
+                stock = value;
+            }
+            else
+            {
+                Console.WriteLine("ERROR: El stock es mayor o igual que 0.");
+            }
+        }
+
+    }
+    public Producto() : this("Sin nombre de producto", new Categoria(), 0, 0) { }
+    public Producto(string nombreProducto, Categoria categoria, double precio, int stock)
+    {
+        NombreProducto = nombreProducto;
+        Categoria = categoria;
+        Precio = precio;
+        Stock = stock;
+    }
+    public void MostrarInfo()
+    {
+        Console.WriteLine($"Producto: {NombreProducto}");
+        Console.WriteLine($"Precio: {Precio:C}");
+        Console.WriteLine($"Stock: {Stock} unidades");
+        Categoria.MostrarCategoria();
+        Console.WriteLine(new string('-',50));
+
+    }
+
+}
+
+class Program
+{
+    static void Main()
+    {
+        //crear categoria
+        Categoria categoria = new Categoria("Higiene", "Produtos de limpieza del hogar");
+
+        //crear producto con categoria
+        Producto producto = new Producto("Jabon liquido",categoria,7.50, 20);
+        producto.MostrarInfo();
+
+        Producto produc = new Producto("Detergente", categoria,0,-1);
+        produc.MostrarInfo();
+    }
+}
+*/
+#endregion
