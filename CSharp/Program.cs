@@ -5,6 +5,7 @@ using System.Diagnostics.Metrics;
 using System.Net.Http.Headers;
 using System.Numerics;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 #region VARIABLES Y TIPOS DE DATOS / IMPRIMIR Y LEER EN CONSOLA
@@ -2078,7 +2079,7 @@ for (int i = 1; i < empleados.Length; i++)
 
 #endregion
 
-#region MODULO 11 : INTERFACES
+#region MODULO 10 Y 11 : INTERFACES Y MANEJO DE EXCEPCIONES
 /*
 interface IVehiculo
 {
@@ -2131,7 +2132,7 @@ class Program
     }
 }
 */
-
+/*
 interface IImprimible
 {
     void Imprimir();
@@ -2197,4 +2198,219 @@ class Program
 
     }
 }
-#endregion  
+*/
+/*
+interface IImprimible
+{
+    void Imprimir();
+}
+class Transaccion : IImprimible
+{
+    public decimal Monto { get; set; }
+    public string Tipo { get; set; }
+    public Transaccion(string tipo, decimal monto)
+    {
+        this.Tipo = tipo;
+        this.Monto = monto;
+    }
+    public void Imprimir()
+    {
+        Console.WriteLine($"Transaccion - Monto: {Monto:C}, Tipo: {Tipo}");
+    }
+}
+
+public class SaldoInsuficienteException : Exception
+{
+    public decimal SaldoActual { get; set; }
+    public SaldoInsuficienteException(decimal saldoActual, decimal monto)
+        : base($"Error: Saldo insuficiente. Intentaste retirar {monto:C}, pero solo tienes {saldoActual:C}.")
+    {
+        SaldoActual = saldoActual;
+    }
+
+}
+class CuentaBancaria
+{
+    public decimal Saldo { get; set; }
+    public CuentaBancaria(decimal saldoInicial)
+    {
+        Saldo = saldoInicial;
+    }
+    public Transaccion Retirar(decimal monto)
+    {
+        if (monto <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(monto), "El monto debe ser positivo.");
+        }
+        if (monto > Saldo)
+        {
+            throw new SaldoInsuficienteException(Saldo, monto);
+        }
+        Saldo -= monto;
+
+        return new Transaccion("Retiro", monto);
+    }
+    public Transaccion Depositar(decimal monto)
+    {
+        if (monto < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(monto), "El monto debe ser positivo.");
+        }
+        Saldo += monto;
+
+        return new Transaccion("Deposito", monto);
+
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        CuentaBancaria cuentaBancaria = new CuentaBancaria(200);
+
+        IImprimible[] imprimibles = new IImprimible[4];
+        int index = 0;
+
+        try
+        {
+            imprimibles[index++] = cuentaBancaria.Depositar(100);
+            imprimibles[index++] = cuentaBancaria.Retirar(50);
+            imprimibles[index++] = cuentaBancaria.Retirar(250); //no hay saldo: S/0.00
+            imprimibles[index++] = cuentaBancaria.Retirar(1); 
+        }
+        catch (ArgumentOutOfRangeException ex)
+        {
+            Console.WriteLine($"Error de argumento: {ex.Message}");
+        }
+        catch (SaldoInsuficienteException ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error inesperado: {ex.Message}");
+        }
+        finally
+        {
+            Console.WriteLine($"\n=== comprobantes generados ===");
+            for (int i = 0; i < index; i++)
+            {
+                imprimibles[i].Imprimir();
+            }
+            Console.WriteLine($"Saldo final de la cuenta: {cuentaBancaria.Saldo:C}");
+        }
+    }
+}
+*/
+
+interface IImprimible
+{
+    void Imprimir();
+}
+
+class Transaccion : IImprimible
+{
+    public string Tipo { get; set; }
+    public decimal Monto { get; set; }
+    public Transaccion(string tipo, decimal monto)
+    {
+        this.Tipo = tipo;
+        this.Monto = monto;
+    }
+
+    public void Imprimir()
+    {
+        Console.WriteLine($"Transaccion - Tipo: {Tipo}, Monto: {Monto:C}.");
+    }
+}
+class SaldoInsuficienteException : Exception
+{
+    public decimal SaldoActual { get; set; }
+    public SaldoInsuficienteException(decimal saldoActual, decimal monto)
+    : base($"Saldo insuficiente: Intentaste retirar {monto:C}, pero solo tienes {saldoActual:C}")
+    {
+        this.SaldoActual = saldoActual;
+    }
+}
+class CuentaBancaria
+{
+    public decimal Saldo { get; set; }
+    public CuentaBancaria(decimal saldoIicial)
+    {
+        this.Saldo = saldoIicial;
+    }
+    public Transaccion Retirar(decimal monto)
+    {
+        if (monto <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(monto), monto, "Se retira montos positivos.");
+        }
+        if (monto > Saldo)
+        {
+            throw new SaldoInsuficienteException(Saldo, monto);
+        }
+        Saldo -= monto;
+        return new Transaccion("Retirar", monto);
+    }
+    public Transaccion Depositar(decimal monto)
+    {
+        if (monto <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(monto), monto, "Se deposita montos positivos.");
+        }
+        Saldo += monto;
+        return new Transaccion("Depositar", monto);
+    }
+
+
+}
+class Program
+{
+    static void Main()
+    {
+        CuentaBancaria cuentaBancaria = new CuentaBancaria(300);
+
+        IImprimible[] comprobante = new IImprimible[4];
+        int index = 0;
+
+        try
+        {
+            comprobante[index++] = cuentaBancaria.Depositar(100);
+            comprobante[index++] = cuentaBancaria.Retirar(150);
+            comprobante[index++] = cuentaBancaria.Retirar(300);
+            //comprobante[index++] = cuentaBancaria.Retirar(-20);
+        }
+        //Saldo en cero
+        catch (SaldoInsuficienteException ex) when (ex.SaldoActual == 0)
+        {
+            Console.WriteLine($"[when: Saldo en cero] Error: {ex.Message}");
+        }
+        //General
+        catch (SaldoInsuficienteException ex)
+        {
+            Console.WriteLine($"[Saldo insuficiente] Error: {ex.Message}");
+        }
+        //Monto negativo
+        catch (ArgumentOutOfRangeException ex) when ((decimal)ex.ActualValue < 0)
+        {
+            Console.WriteLine($"[when: monto negativo] Error: {ex.Message}");
+        }
+        catch (ArgumentOutOfRangeException ex)
+        {
+            Console.WriteLine($"Error de argumento: {ex.Message}");
+        }
+        finally
+        {
+            Console.WriteLine("\n=== Comprobantes ===");
+            for (int i = 0; i < index; i++)
+            {
+                comprobante[i].Imprimir();
+            }
+            Console.WriteLine($"Saldo final de la cuenta: {cuentaBancaria.Saldo}");
+        }
+
+    }
+}
+
+#endregion
