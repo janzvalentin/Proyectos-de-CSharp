@@ -2303,7 +2303,7 @@ class Program
     }
 }
 */
-
+/*
 interface IImprimible
 {
     void Imprimir();
@@ -2412,5 +2412,378 @@ class Program
 
     }
 }
+*/
+#endregion
+
+#region MODULO 12 : COLLECIONES
+//  List <T> ---> Lista ordenada de elementos (Permite duplicados)
+/*
+using System;
+using System.Collections.Generic;
+class Program
+{
+    static void Main()
+    {
+        List<string> frutas = new List<string> { "Manzana", "Banana", "Pera" };
+        frutas.Add("Uva");
+        frutas.RemoveAt(1); //eLIMINAR POR INDICE
+        frutas.Sort(); //oRDENAR
+        frutas.Add("Manzana");//duplicado pemitido
+
+        Console.WriteLine("=== Lista de frutas ===");
+        foreach (var f in frutas)
+        {
+            Console.WriteLine(f);
+        }
+        Console.ReadLine();
+    }
+
+}
+*/
+/*
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Net;
+using System.Transactions;
+
+class EjemploDictionary
+{
+    static void Main()
+    {
+        Dictionary<int, string> empleados = new Dictionary<int, string>()
+        {
+            {101, "Ana"},
+            {102, "Luis"},
+            {103, "María"}
+        };
+
+        empleados[104] = "Pedro"; // otra forma de agregar
+
+        Console.WriteLine("=== EMPLEADOS ===");
+        foreach (var kvp in empleados)
+        {
+            Console.WriteLine($"ID {kvp.Key} → {kvp.Value}");
+        }
+
+        // Buscar un empleado
+        if (empleados.TryGetValue(102, out string nombre))
+        {
+            Console.WriteLine($"\nEmpleado con ID 102 es {nombre}");
+        }
+    }
+}
+*/
+/*
+class Dictionary
+{
+    static void Main()
+    {
+        var precios = new Dictionary<string, decimal>(StringComparer.OrdinalIgnoreCase);
+        precios["teclado"] = 126.32m;
+
+        if (precios.TryGetValue("teclado", out var p))
+        {
+            Console.WriteLine(p);
+        }
+        */
+        /*
+        var empleados = new Dictionary<int, string>();
+        empleados[100] = "Juan";
+        empleados[101] = "Pedro";
+        empleados[102] = "ALex";
+        empleados[100] = "janz"; //SE SOBREESCRIBE EL VALOS POR QUE SE USA EL INDEXADOR []
+       
+
+        Console.WriteLine("=== EMPLEADOS ===");
+        foreach (var kvp in empleados)
+
+        {
+            Console.WriteLine($" ID {kvp.Key} -> {kvp.Value}");
+        }
+        //BUSCAR EMPLEADOS
+        if (empleados.TryGetValue(100, out var n))
+        {
+            Console.WriteLine($"\nEmpleado con ID 100 es {n}");
+        }
+        */
+
+        /*
+        // Inventario Inicial
+        var telefonica = new Dictionary<string, string>
+        {
+            { "Carlos", "123" },
+            { "Ana", "456"},
+            { "Luis", "789"}
+        };
+
+        Console.WriteLine("=== Agenda Telefonica ===");
+        Mostrar(telefonica);
+
+        //Agregar un nuevo contacto (nombre + número).
+        telefonica.Add("Janz", "666");
+        Console.WriteLine("\nSE agregó el contacto janz:");
+        Mostrar(telefonica);
+
+        //Actualizar el número de un contacto existente.
+        telefonica["Carlos"] = "159";
+        Console.WriteLine("\nSE actualizó el número de un contacto existente:");
+        Mostrar(telefonica);
+
+        //Eliminar un contacto por nombre.
+        telefonica.Remove("Ana");
+        Console.WriteLine("\nSe eliminó un contacto por nombre:");
+        Mostrar(telefonica);
+
+        //Buscar un número de teléfono ingresando un nombre.
+        Console.Write("\nIngrese el nombre a buscar: ");
+        string nombre = Console.ReadLine();
+
+        if (telefonica.TryGetValue(nombre, out string telefono))
+        {
+            Console.WriteLine($"\nEl nombre {nombre} a buscar tiene el numero: {telefono}");
+        }
+        else
+        {
+            Console.WriteLine($"\nEl nombre {nombre} no existe.");
+        }
+
+
+
+
+    }
+    //Muestra la lista completa de contactos al final.
+
+    static void Mostrar(Dictionary<string, string> dic)
+    {
+        foreach (var kvp in dic)
+        {
+            Console.WriteLine($"Nombre {kvp.Key} -> {kvp.Value}");
+        }
+
+    }
+    */
+        /*
+        var grupoA = new HashSet<string> { "Ana", "Luis", "Carlos" };
+        var grupoB = new HashSet<string> { "Carlos", "María", "Pedro" };
+
+        //Haz la Unión (todos los estudiantes de ambos grupos).
+        var union = new HashSet<string>(grupoA);
+        union.UnionWith(grupoB);
+
+        //Haz la Intersección (los que están en ambos grupos).
+        var interseccion = new HashSet<string>(grupoA);
+        interseccion.IntersectWith(grupoB);
+
+        //Mostrar resultados
+        Console.WriteLine("=== UNION ===");
+        foreach (var item in union)
+        {
+            Console.WriteLine(item);
+        }
+
+        Console.WriteLine("=== INTERSECCION ===");
+        foreach (var item in interseccion)
+        {
+            Console.WriteLine(item);
+        }
+        */
+        /*
+        var pila = new Stack<string>();
+
+        // 1️⃣ Agregar elementos (Push)
+        pila.Push("Plato 1");
+        pila.Push("Plato 2");
+        pila.Push("Plato 3");
+
+        Console.WriteLine("=== PILA (Stack) ===");
+        foreach (var item in pila)
+            Console.WriteLine(item);
+
+        // 2️⃣ Sacar elementos (Pop)
+        Console.WriteLine($"\nSacando: {pila.Pop()}"); // Plato 3
+        Console.WriteLine($"Sacando: {pila.Pop()}");   // Plato 2
+
+        // 3️⃣ Mirar el de arriba sin sacarlo (Peek)
+        Console.WriteLine($"\nEn la cima queda: {pila.Peek()}");
+        */
+
+        //STACK(LIFO) EL ULTIMO QUE ENTRA ES EL PRIMERO EN SALIR
+        /*
+        var pila = new Stack<string>();
+
+        pila.Push("www.google.com");
+        pila.Push("www.tiktok.com");
+        pila.Push("www.kick.com");
+
+        Console.WriteLine("=== Páginas ===");
+        foreach (var item in pila) Console.WriteLine(item);
+
+        Console.WriteLine($"\nAtrás: {pila.Pop()}");
+        Console.WriteLine($"Atrás: {pila.Pop()}");
+
+        Console.WriteLine($"\nQueda La pagina: {pila.Peek()}");
+    */
+
+        //QUEUE(FIFO) EL PRIMERO QUE ENTRA ES EL PRIMERO EN SALIR
+        /*
+        var cola = new Queue<string>();
+        cola.Enqueue("Fecha de entrega");
+        cola.Enqueue("voltaje de la imp");
+        cola.Enqueue("costo imp");
+
+        Console.WriteLine("=== documentos ===");
+        foreach (var item in cola) Console.WriteLine(item);
+
+        Console.WriteLine($"\nDesencolar: {cola.Dequeue()}");
+        Console.WriteLine($"Desencolar: {cola.Dequeue()}");
+
+        Console.WriteLine($"\nEn la cima queda: {cola.Peek()}");
+        */
+
+        //SorteList<TKey,Tvalue>
+        /*
+        var telefonica = new SortedList<int, string>();
+        telefonica.Add(103, "Ana");
+        telefonica.Add(105, "juan");
+        telefonica.Add(104, "Alex");
+
+        Console.WriteLine("\n=== AGENDA TELEFONICA ===");
+        foreach (var item in telefonica)
+        {
+            Console.WriteLine($" ID: {item.Key} -> {item.Value}");
+        }
+        Console.WriteLine();
+        nsole.WriteLine($"\nEl contacto 1 es: {telefonica.Keys[0]} -> {telefonica.Values[0]}");
+        */
+
+        //SorteDistionari<Tkey,Tvalue>
+        /*
+        var notas = new SortedDictionary<int, int>();
+        notas[100] = 10;
+        notas[105] = 20;
+        notas[103] = 18;
+        notas[101] = 12;
+        notas[101] = 13;
+        notas[102] = 15;
+
+        Console.WriteLine("\n=== Estudiantes ===");
+        foreach (var item in notas)
+        {
+            Console.WriteLine($"ID: {item.Key} -> {item.Value}");
+        }
+
+        Console.Write("INGRESE ID A BUSCAR: ");
+        int idBuscar = int.Parse(Console.ReadLine());
+
+        if (notas.TryGetValue(idBuscar, out var id))
+        {
+            Console.WriteLine($"\nLa nota del estudiantes es: {id}");
+        }
+        */
+        /*
+        var inventario = new Dictionary<int, string>();
+        inventario[200] = "Radio";
+        inventario[204] = "TV";
+        inventario[201] = "Refrigeradora";
+        inventario[203] = "Parlante";
+        inventario[202] = "Laptop";
+
+        Console.WriteLine("\n===INVENTARIO===");
+        foreach (var item in inventario)
+        {
+            Console.WriteLine($"Código:{item.Key} -> {item.Value}");
+        }
+
+        Console.Write("\nIngrese una opción: ");
+        int idOpcion = int.Parse(Console.ReadLine());
+
+        if (inventario.TryGetValue(idOpcion, out var value))
+        {
+            Console.WriteLine($"El nombre es: {value}");
+        }
+        else
+        {
+            Console.WriteLine("No existe ese producto.");
+        }
+        */
+        /*
+        var inventario = new SortedDictionary<int, string>();
+        inventario[204] = "TV";
+        inventario[200] = "Refri";
+        inventario[202] = "Radio";
+        inventario[203] = "lAPTOP";
+        inventario[201] = "Motor";
+
+        Console.WriteLine("\n=== Inventario ===");
+        foreach (var item in inventario)
+        {
+            Console.WriteLine($"Código: {item.Key} -> {item.Value}");
+        }
+
+        Console.Write("\nIngrese el codigo a buscar: ");
+        int codBuscar = int.Parse(Console.ReadLine());
+
+        if (inventario.TryGetValue(codBuscar, out var value))
+        {
+            Console.WriteLine($"El producto con código {codBuscar} es: {value}");
+        }
+        else
+        {
+            Console.WriteLine("No existe el producto.");
+        }
+        */
+/*
+
+        var productos = new SortedList<int, decimal>();
+        productos[100] = 205.36m;
+        productos[103] = 105.35m;
+        productos[101] = 95.55m;
+        productos[102] = 50.60m;
+
+        var clientes = new SortedDictionary<int, string>();
+        clientes[2] = "Ana";
+        clientes[4] = "José";
+        clientes[1] = "Alex";
+        clientes[3] = "María";
+
+        Console.WriteLine("\n=== PPRODUCTOS ===");
+        foreach (var item in productos)
+        {
+            Console.WriteLine($"ID: {item.Key} -> {item.Value:C}");
+        }
+
+        Console.WriteLine("\n=== CLIENTES ===");
+        foreach (var item in clientes)
+        {
+            Console.WriteLine($"ID: {item.Key} -> {item.Value}");
+        }
+
+        Console.Write("\nIngrese el ID del cliente: ");
+        int idCliente = int.Parse(Console.ReadLine());
+
+        if (clientes.TryGetValue(idCliente, out var nombre))
+        {
+            Console.WriteLine($"El Código {idCliente} es del cliente: {nombre}");
+            Console.Write("\nIngese el ID del producto: ");
+            int idProducto = int.Parse(Console.ReadLine());
+            if (productos.TryGetValue(idProducto, out var precio))
+            {
+                Console.WriteLine($"El producto con ID {idProducto} cuesta: {precio:C}");
+                Console.WriteLine($"\nCliente {nombre} compró el producto con ID {idProducto} a {precio:C} ");
+            }
+            else
+            {
+                Console.WriteLine("\nEl producto no existe.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("\nEse ID no existe.");
+        }
+
+    }
+}
+*/
 
 #endregion

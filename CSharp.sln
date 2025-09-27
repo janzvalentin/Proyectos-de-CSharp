@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sistema de Gestión de Bibl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sistema de Notificaciones Empresariales", "Sistema de Notificaciones Empresariales\Sistema de Notificaciones Empresariales.csproj", "{336206C1-3BA2-4ED8-AFA4-8621D60D80C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sistema de Gestión de Estudiantes Universitarios", "Sistema de Gestión de Estudiantes Universitarios\Sistema de Gestión de Estudiantes Universitarios.csproj", "{2E6D149B-71E8-4ECD-A3AE-8E570E1DB792}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{336206C1-3BA2-4ED8-AFA4-8621D60D80C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{336206C1-3BA2-4ED8-AFA4-8621D60D80C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{336206C1-3BA2-4ED8-AFA4-8621D60D80C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E6D149B-71E8-4ECD-A3AE-8E570E1DB792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E6D149B-71E8-4ECD-A3AE-8E570E1DB792}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E6D149B-71E8-4ECD-A3AE-8E570E1DB792}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E6D149B-71E8-4ECD-A3AE-8E570E1DB792}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
