@@ -5,6 +5,7 @@ using System.Diagnostics.Metrics;
 using System.Net.Http.Headers;
 using System.Numerics;
 using System.Reflection.Emit;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
@@ -1464,6 +1465,7 @@ class Program
 }
 */
 using System.Text.RegularExpressions;
+using System.Transactions;
 using System.Xml.Schema;
 /*
 class Estudiante
@@ -2864,8 +2866,7 @@ class Program
 
 #endregion
 #region MODULO 14: DELEGATES Y EVENTOS
-using System;
-
+/*
 class Program
 {
     static void Main()
@@ -2880,6 +2881,176 @@ class Program
         Console.WriteLine(multiplicar(4, 6));
     }
 }
+*/
 
+#endregion
+#region MODULO 15: LINQ
+class Program
+{
+    static void Main()
+    {
+        /*
+        List<Product> products = new List<Product>
+        {
+        new Product { Name="Mouse", Price=25},
+        new Product {Name="Teclado", Price=40},
+        new Product {Name ="Monitor", Price=300 },
+        new Product {Name ="USB", Price=15},
+        new Product {Name ="Laptop", Price=850},
+        new Product {Name ="Audifonos", Price=50},
+        new Product {Name ="Tablet", Price=400}
+        };
+        var resultado = products
+            .Where(p => p.Price >= 50)//FILTRA PRODUCTOS>=50
+            .OrderBy(p => p.Price)//ORDENA DE MENOR A MAYOR
+            .Take(3)//TOMA LOS PRIMEROS 3
+        .Select(p => $"{p.Name.ToUpper()} - {p.Price}");//TRANSFORMAMOS A STRING
+        
+        
+        List<Student> students = new List<Student>
+{
+    new Student { Name = "Ana",     Age = 20 },
+    new Student { Name = "Luis",    Age = 22 },
+    new Student { Name = "María",   Age = 19 },
+    new Student { Name = "Carlos",  Age = 25 },
+    new Student { Name = "Sofía",   Age = 21 },
+    new Student { Name = "Pedro",   Age = 23 },
+    new Student { Name = "Lucía",   Age = 20 },
+    new Student { Name = "Javier",  Age = 24 }
+};
+        
+        List<Product> products = new List<Product>
+{
+    new Product { Name = "Mouse", Price = 25 },
+    new Product { Name = "Teclado", Price = 40 },
+    new Product { Name = "Monitor", Price = 300 },
+    new Product { Name = "USB", Price = 15 },
+    new Product { Name = "Laptop", Price = 850 },
+    new Product { Name = "Audífonos", Price = 50 },
+    new Product { Name = "Tablet", Price = 400 }
+};
+
+
+
+        var resultado = products
+            .Where(p => p.Price >= 21)
+            .OrderBy(p => p.Price)
+            .Skip(2)
+            .Take(3)
+            .Select(p => $"PRODUCTO: {p.Name} - PRECIO FINAL: {p.Price * 0.9m:c}");
+
+
+        Console.WriteLine("\n==== PRODUCTOS ====");
+        foreach (var n in resultado)
+        {
+            Console.WriteLine(n);
+        }
+        */
+        /*
+                var users = new[] {
+          new { Name = "Ana", Active = true },
+          new { Name = "Luis", Active = false },
+          new { Name = "Carla", Active = true }
+        };
+                bool hayActivos = users.All(p => p.Active);
+
+                Console.WriteLine(hayActivos);
+
+                Console.WriteLine(new string('-', 30));
+
+                var tags = new List<string> { "csharp", "linq", "dotnet" };
+                bool tiene = tags.Contains("linq");
+                bool tiene2 = tags.Any(p => p == "lampara");
+
+                Console.WriteLine(tiene);
+                Console.WriteLine(tiene2); 
+
+                Console.WriteLine(new string('-', 30));
+
+                var orders = new[] {
+          new { Id = 1, Total = 200m },
+          new { Id = 2, Total = 0m }
+        };
+                var posible = orders.FirstOrDefault(p => p.Total == 0m);
+                var posible2 = orders.Single(p => p.Id == 1);
+
+                Console.WriteLine(posible);
+                Console.WriteLine(posible2);
+        */
+
+        /*
+        List<Products> products = new List<Products>
+        {
+        new Products {Name="Mouse",Price=25 },
+        new Products {Name="Teclado",Price=40 },
+        new Products {Name="Monitor",Price=300 },
+        new Products {Name="USB",Price=15 },
+        new Products {Name="Laptop",Price=850 },
+        new Products {Name="Audifonos",Price=50 },
+        new Products {Name="Tablet",Price=400 }
+        };
+
+        var resultado = new
+        {
+            Cantidad = products.Count(),
+            SumaTotal = products.Sum(p => p.Price),
+            Promedio = products.Average(p => p.Price),
+            min = products.Min(p => p.Price),
+            max = products.Max(p => p.Price),
+        };
+
+        Console.WriteLine($"Cantidad: {resultado.Cantidad}");
+        Console.WriteLine($"Suma total: {resultado.SumaTotal:c}");
+        Console.WriteLine($"Promedio: {resultado.Promedio:c}");
+        Console.WriteLine($"Mínimo: {resultado.min:c}");
+        Console.WriteLine($"Máximo: {resultado.max:c}");
+        */
+
+        /*
+        // 🎓 Lista de estudiantes, cada uno con una lista de cursos
+        var students = new List<Student>
+        {
+            new Student { Name = "Ana", Courses = new List<string> { "C#", "SQL", "HTML" } },
+            new Student { Name = "Luis", Courses = new List<string> { "Java", "C#", "Python" } },
+            new Student { Name = "Carla", Courses = new List<string> { "Python", "CSS" } }
+        };
+
+        // ===========================================================
+        // ✅ 1️⃣ SELECT → devuelve una lista de listas (no aplana)
+        // ===========================================================
+        var listaCursosSelect = students.Select(s => s.Courses);
+
+        Console.WriteLine("=== USANDO SELECT ===");
+        foreach (var lista in listaCursosSelect)
+            Console.WriteLine(string.Join(", ", lista));
+
+        // ===========================================================
+        // ✅ 2️⃣ SELECTMANY → aplana todas las listas en una sola
+        // ===========================================================
+        var listaCursosAplanada = students.SelectMany(s => s.Courses).Distinct();
+
+        Console.WriteLine("\n=== USANDO SELECTMANY ===");
+        foreach (var curso in listaCursosAplanada)
+            Console.WriteLine(curso);
+        */
+
+
+
+
+
+    }
+}
+class Student
+{
+    public string Name { get; set; }
+    public List<string> Courses { get; set; }
+}
+/*
+class Products
+{
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+}
+*/
 
 #endregion
